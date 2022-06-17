@@ -1,0 +1,75 @@
+/* color palette from <https://github.com/vuejs/theme> */
+:root {
+  --background-color-green: #4FC1A6;
+  --background-color-grey: #E5E5E5;
+  --background-color-orange: #F7786B;
+  --background-color-blue: #58ABF6;
+  --background-color-yellow: #FFCE4B;
+  --background-color-purple: #7C538C;
+  --background-color-brown: #B1736C;
+  --background-color-white: #ffffff;
+
+  --background-lightgrey: #F5F5F5;
+
+  --text-black: #303943;
+
+  --vt-c-white-soft: #f8f8f8;
+  --vt-c-white-mute: #f2f2f2;
+
+  --vt-c-black: #181818;
+  --vt-c-black-soft: #222222;
+  --vt-c-black-mute: #282828;
+
+  --vt-c-indigo: #2c3e50;
+
+  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
+  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
+  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --vt-c-text-light-1: var(--vt-c-indigo);
+  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
+  --vt-c-text-dark-1: var(--vt-c-white);
+  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-background: var(--background-color-white);
+  --color-background-soft: var(--vt-c-white-soft);
+  --color-background-mute: var(--vt-c-white-mute);
+
+  --color-border: var(--vt-c-divider-light-2);
+  --color-border-hover: var(--vt-c-divider-light-1);
+
+  --color-heading: var(--vt-c-text-light-1);
+  --color-text: var(--background-color-white);
+
+  --section-gap: 160px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+  font-family: 'Circular Std';
+}
+
+body {
+  background-color: var(--background-lightgrey);
+}
+
+h1 {
+  font-size: 30px;
+  line-height: 42px;
+  color: var(--text-black);
+}
+
+
+@font-face {
+  font-family: "Circular Std";
+  src: url("../assets/fonts/circular-std-medium-500.ttf") format("truetype");
+}
