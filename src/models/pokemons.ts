@@ -11,7 +11,8 @@ export interface Pokemon {
     moves: PokemonMove[],
     gender_rate: number,
     sprite: string,
-    sprites: PokemonSprites
+    sprites: PokemonSprites,
+    color: string
 }
 
 export interface PokemonBasicRessource {
@@ -28,7 +29,7 @@ export interface PokemonsList {
 
 export interface PokemonType {
     slot: number,
-    types: PokemonBasicRessource[]
+    type: PokemonBasicRessource
 }
 
 export interface PokemonStat {

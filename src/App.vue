@@ -3,7 +3,7 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <img src="@/assets/pokeicon.svg" />
+  <img class="pokelogo" src="@/assets/pokeicon.svg" />
   <RouterView />
 </template>
 
@@ -15,7 +15,7 @@ import { RouterView } from "vue-router";
 
   
 }
-img {
+.pokelogo {
     position: absolute;
     right: 0;
     top: 0;
