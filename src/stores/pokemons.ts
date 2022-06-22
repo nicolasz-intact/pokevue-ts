@@ -1,5 +1,4 @@
 import { defineStore } from "pinia"
-import axios from 'axios'
 import type { Pokemon } from '@/models/pokemons'
 
 export interface PokemonsListResponse {
@@ -10,7 +9,7 @@ export interface PokemonsListResponse {
 }
 
 export interface PokemonsState {
-    pokemons: Pokemon[]
+    pokemons: Pokemon[],
 }
 
 export const usePokemonsStore = defineStore('pokemons', {
@@ -18,12 +17,9 @@ export const usePokemonsStore = defineStore('pokemons', {
         pokemons: [] as Pokemon[],
     }),
     getters: {
-        getPokemons(): Pokemon[] {
-            return this.pokemons
-        },
         getPokemonId: (state) => {
             return (pokemonId: number) => {
-                if(pokemonId < 10) {
+                if (pokemonId < 10) {
                     return '00' + pokemonId
                 } else if (pokemonId < 100) {
                     return '0' + pokemonId
@@ -46,37 +42,19 @@ export const usePokemonsStore = defineStore('pokemons', {
     },
     actions: {
         async fetchAll() {
-            axios.get<PokemonsListResponse>('/pokemon', {
-                baseURL: 'https://pokeapi.co/api/v2',
-            }).then(response => {
-                const listpokemons = response.data.results;
-                let promises: any = []
-                let pokemonscolor: any = []
-                listpokemons.forEach(pokemon => {
-                    promises.push(
-                        axios.get<Pokemon>(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`).then(
-                            res => {
-                                res.data.sprite = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/official-artwork/${res.data.id}.png?raw=true`
-                                this.pokemons.push(res.data)                        
-                            }
-                        )
-                    )
-                    promises.push(
-                        axios.get<any>(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.name}`).then(
-                            res => {
-                                pokemonscolor.push({name: pokemon.name, color: res.data.color.name})                       
-                            }
-                        )
-                    )
-                    Promise.all(promises).then(() => {
-                        this.pokemons = this.pokemons.sort(( a, b) => a.id - b.id )
-                        this.pokemons.forEach(pokemon => {
-                            const pokemonToUpdate = pokemonscolor.find(poke => pokemon.name == poke.name)
-                            pokemon.color = pokemonToUpdate.color
-                        })
-                    })
+            const pokemons: PokemonsListResponse = await (
+                await fetch('https://pokeapi.co/api/v2/pokemon')
+            ).json()
+            await Promise.all(
+                pokemons.results.map(async (pokemon) => {
+                    const pokemon_description: Pokemon = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)).json()
+                    const pokemon_color: any = await (await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.name}`)).json()
+                    pokemon_description.color = pokemon_color.color.name
+                    pokemon_description.sprite = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/official-artwork/${pokemon_description.id}.png?raw=true`
+                    this.pokemons.push(pokemon_description)
                 })
-            })
+            )
+            this.pokemons = this.pokemons.sort((a, b) => a.id - b.id)
         }
     }
 })

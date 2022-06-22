@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import PokemonCard from '@/components/PokemonCard.vue'
 
-import { onMounted, computed } from "vue"
+import { computed } from "vue"
 import { usePokemonsStore } from "@/stores/pokemons"
 
 const pokemonsStore = usePokemonsStore()
@@ -10,9 +10,10 @@ const pokemons = computed(() => {
   return pokemonsStore.pokemons
 })
 
-onMounted(() => {
-  (!pokemonsStore.pokemons) ? pokemonsStore.getPokemons() : pokemonsStore.fetchAll()
-})
+if(!pokemonsStore.pokemons.length) {
+  pokemonsStore.fetchAll()
+}
+
 </script>
 
 <template>
