@@ -68,6 +68,9 @@ h1 {
   color: var(--text-black);
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
 
 @font-face {
   font-family: "Circular Std";

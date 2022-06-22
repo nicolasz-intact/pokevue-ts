@@ -1,5 +1,6 @@
 <template>
-    <MenuCardItem :cardTitle="pokemon.name" :cardBackground="pokemon.color" :cardHeight="110" :cardType="'pokemon'" :cardImg="pokemon.sprite">
+    <MenuCardItem :cardTitle="pokemon.name" :cardBackground="pokemon.color" :cardHeight="110" :cardType="'pokemon'"
+        :cardImg="pokemon.sprite" :cardLink="getPokemonLink()">
         <template #pokemonnumber>
             #{{ pokemonsStore.getPokemonId(pokemon.id) }}
         </template>
@@ -33,6 +34,9 @@ const props = defineProps<{
     pokemon: Pokemon;
 }>();
 
+function getPokemonLink(): string {
+    return `/pokemon/${props.pokemon.id}`
+}
 </script>
 
 <style scoped lang="scss">

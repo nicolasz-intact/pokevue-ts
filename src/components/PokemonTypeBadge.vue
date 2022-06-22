@@ -14,7 +14,6 @@ defineProps<{
 
 <style scoped lang="scss">
     .badge {
-        display: block;
         background-color: #fff6;
         border-radius: 38px;
         padding: 6px 4px;

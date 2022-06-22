@@ -2,56 +2,48 @@
 import PokemonCard from '@/components/PokemonCard.vue'
 
 import { computed } from "vue"
+import { useRouter } from 'vue-router'
+
 import { usePokemonsStore } from "@/stores/pokemons"
 
+const router = useRouter()
 const pokemonsStore = usePokemonsStore()
 
 const pokemons = computed(() => {
   return pokemonsStore.pokemons
 })
 
-if(!pokemonsStore.pokemons.length) {
-  pokemonsStore.fetchAll()
-}
-
 </script>
 
 <template>
   <div class="container">
-    <main>
-      <h1>Pokedex</h1>
-      <div class="pokemons-list">
-        <template v-for="pokemon in pokemons" :key="pokemon.id">
-          <PokemonCard :pokemon="pokemon" />
-        </template>
-      </div>
-    </main>
+    <h1>Pokedex</h1>
+    <div class="pokemons-list">
+      <template v-for="pokemon in pokemons" :key="pokemon.id">
+        <PokemonCard :pokemon="pokemon" />
+      </template>
+    </div>
   </div>
-
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
-  background-color: var(--background-lightgrey);
+  background-color: var(--background-color-white);
+  padding-top: 7em;
 
-  main {
-    background-color: var(--background-color-white);
-    border-radius: 0px 0px 30px 30px;
 
-    h1 {
-      margin: 0em auto 1em auto;
-      padding-top: 4em;
-      width: 90%;
-      font-weight: bold;
-    }
+  h1 {
+    margin: 0em auto 1em auto;
+    width: 90%;
+    font-weight: bold;
+  }
 
-    .pokemons-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 1em;
-      align-items: center;
-      padding: 1em;
-    }
+  .pokemons-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+    align-items: center;
+    padding: 1em;
   }
 }
 </style>

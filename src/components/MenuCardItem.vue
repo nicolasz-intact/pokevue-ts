@@ -48,6 +48,7 @@ function changePage() {
     width: 155px;
     height: 63px;
     border-radius: 15px;
+    cursor: pointer;
 
     &.blue {
         background-color: var(--background-color-blue);

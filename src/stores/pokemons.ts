@@ -17,6 +17,9 @@ export const usePokemonsStore = defineStore('pokemons', {
         pokemons: [] as Pokemon[],
     }),
     getters: {
+        getPokemonById: (state) => {
+            return (pokemonId: number) => state.pokemons.find(pokemon => pokemon.id == pokemonId)
+          },
         getPokemonId: (state) => {
             return (pokemonId: number) => {
                 if (pokemonId < 10) {
@@ -29,14 +32,10 @@ export const usePokemonsStore = defineStore('pokemons', {
             }
         },
         getPokemonTypes: (state) => {
-            return (pokemonId: number) => {
-                console.log(pokemonId)
-                const pokemon: Pokemon = state.pokemons.find(pokemon => pokemon.id == pokemonId)
-                let pokemontypes: any = []
-                pokemon.types.forEach(types => {
-                    types.types.forEach(type => pokemontypes.push(type.name))
-                })
-                return pokemontypes
+            return (pokemon: Pokemon) => {
+                let ptypes: string[] = []
+                pokemon.types.forEach(types => ptypes.push(types.type.name))
+                return ptypes
             }
         }
     },

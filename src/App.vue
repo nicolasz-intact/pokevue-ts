@@ -1,10 +1,20 @@
 <script setup lang="ts">
-import { RouterView } from "vue-router";
+import { RouterView } from 'vue-router';
+import Header from './components/Header.vue'
+import { usePokemonsStore } from "@/stores/pokemons"
+
+const pokemonsStore = usePokemonsStore()
+if(!pokemonsStore.pokemons.length) {
+  pokemonsStore.fetchAll()
+}
+
 </script>
 
 <template>
-  <img class="pokelogo" src="@/assets/pokeicon.svg" />
-  <RouterView />
+  <Header/>
+  <div class="main">
+    <RouterView />
+  </div>
 </template>
 
 <style lang="scss">
@@ -12,13 +22,6 @@ import { RouterView } from "vue-router";
 
 .main {
   max-height: 100vh;
-
-  
+  background-color: var(---lightgrey);
 }
-.pokelogo {
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 999;
-  }
 </style>
