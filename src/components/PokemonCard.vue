@@ -1,5 +1,5 @@
 <template>
-    <MenuCardItem :cardTitle="pokemon.name" :cardBackground="pokemon.color" :cardHeight="110" :cardType="'pokemon'"
+    <MenuCardItem :cardTitle="pokemon.name" :cardBackground="POKEMON_TYPE_COLORS[pokemon.types[0].type.name]" :cardHeight="110" :cardType="'pokemon'"
         :cardImg="pokemon.sprite" :cardLink="getPokemonLink()">
         <template #pokemonnumber>
             #{{ pokemonsStore.getPokemonId(pokemon.id) }}
@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import MenuCardItem from '@/components/MenuCardItem.vue'
 import PokemonTypeBadge from '@/components/PokemonTypeBadge.vue'
-
+import { POKEMON_TYPE_COLORS } from '@/constants'
 import { computed } from "vue"
 import { usePokemonsStore } from "@/stores/pokemons"
 import type { Pokemon } from "@/models/pokemons"

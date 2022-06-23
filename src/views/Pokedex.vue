@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import PokemonCard from '@/components/PokemonCard.vue'
-
 import { computed } from "vue"
-import { useRouter } from 'vue-router'
-
 import { usePokemonsStore } from "@/stores/pokemons"
 
-const router = useRouter()
 const pokemonsStore = usePokemonsStore()
 
 const pokemons = computed(() => {

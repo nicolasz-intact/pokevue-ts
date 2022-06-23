@@ -17,12 +17,12 @@ interface MenuItems {
 }
 
 const menuitems = ref([
-    { title: "Pokedex", backgroundcolor: "green", link: "/pokedex" } as MenuItems,
-    { title: "Moves", backgroundcolor: "red" } as MenuItems,
-    { title: "Abilities", backgroundcolor: "blue" } as MenuItems,
-    { title: "Items", backgroundcolor: "yellow" } as MenuItems,
-    { title: "Locations", backgroundcolor: "purple" } as MenuItems,
-    { title: "Type Charts", backgroundcolor: "brown" } as MenuItems
+    { title: "Pokedex", backgroundcolor: "#48D0B0", link: "/pokedex" } as MenuItems,
+    { title: "Moves", backgroundcolor: "#FB6C6C" } as MenuItems,
+    { title: "Abilities", backgroundcolor: "#429BED" } as MenuItems,
+    { title: "Items", backgroundcolor: "#F6C747" } as MenuItems,
+    { title: "Locations", backgroundcolor: "#7C538C" } as MenuItems,
+    { title: "Type Charts", backgroundcolor: "#B1736C" } as MenuItems
 ])
 </script>
 

@@ -5,10 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-
 defineProps<{
-    type: string;
+    type: string
 }>();
 </script>
 

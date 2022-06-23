@@ -1,6 +1,6 @@
 <template>
     <div class="card-container" :class="[cardBackground, { cardcursor: cardLink }]"
-        :style="{ 'height': cardHeight + 'px' }" @click="changePage">
+        :style="{ 'height': cardHeight + 'px', backgroundColor:  cardBackground}" @click="changePage">
         <div class="card">
             <div v-if="isShadow" class="card--ellipse"></div>
             <div class="card--hint">

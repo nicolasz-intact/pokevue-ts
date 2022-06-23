@@ -50,6 +50,10 @@ export const usePokemonsStore = defineStore('pokemons', {
                     const pokemon_color: any = await (await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.name}`)).json()
                     pokemon_description.color = pokemon_color.color.name
                     pokemon_description.sprite = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/official-artwork/${pokemon_description.id}.png?raw=true`
+                    pokemon_description.egg_goups = pokemon_color.egg_groups
+                    pokemon_description.flavors_text = pokemon_color.flavor_text_entries
+                    pokemon_description.gender_rate = pokemon_color.gender_rate
+
                     this.pokemons.push(pokemon_description)
                 })
             )

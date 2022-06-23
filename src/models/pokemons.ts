@@ -12,7 +12,9 @@ export interface Pokemon {
     gender_rate: number,
     sprite: string,
     sprites: PokemonSprites,
-    color: string
+    color: string,
+    egg_goups: PokemonBasicRessource[],
+    flavors_text: PokemonFlavorsText[]
 }
 
 export interface PokemonBasicRessource {
@@ -57,4 +59,10 @@ export interface PokemonSprites {
     back_shiny: string | null;
     back_female: string | null;
     back_shiny_female: string | null;
-  }
+}
+
+export interface PokemonFlavorsText {
+    flavor_text: string,
+    language: PokemonBasicRessource,
+    version: PokemonBasicRessource
+}
