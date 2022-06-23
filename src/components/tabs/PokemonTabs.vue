@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref, reactive } from 'vue'
 import PokemonAboutTab from './PokemonAboutTab.vue';
+import PokemonStatsTab from './PokemonStatsTab.vue';
 import type { Pokemon } from '@/models/pokemons'
 
 const props = defineProps<{
@@ -8,7 +9,6 @@ const props = defineProps<{
 }>();
 
 const activeTab = ref('about')
-const pokemonDescription = ref()
 
 interface Tab {
     text: string
@@ -17,7 +17,7 @@ interface Tab {
 
 const tabs = reactive([
     { text: 'About', name: 'about' } as Tab,
-    { text: 'Base Stats', name: 'base_stats' } as Tab,
+    { text: 'Base Stats', name: 'stats' } as Tab,
     { text: 'Evolution', name: 'evolution' } as Tab,
     { text: 'Moves', name: "moves" } as Tab
 ])
@@ -45,6 +45,8 @@ function getPokemonDescription() {
           :weight="pokemon.weight"
           :description="getPokemonDescription()"
           :egg_groups="pokemon.egg_goups"/>
+        <PokemonStatsTab v-if="activeTab == 'stats'" 
+          :stats="pokemon.stats"/>
     </div>
 </template>
 

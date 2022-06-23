@@ -1,0 +1,72 @@
+<script lang="ts" setup>
+import type { PokemonStat } from '@/models/pokemons';
+
+interface Stat {
+    text: string
+    value: number
+    current_progress: number
+}
+
+const props = defineProps<{
+    stats: PokemonStat[]
+}>()
+
+const stats: Stat[] = []
+let totalStats: number = 0
+props.stats.forEach(stat => {
+    stats.push({
+        text: stat.stat.name,
+        value: stat.base_stat,
+        current_progress: stat.base_stat
+    })
+    totalStats += stat.base_stat
+})
+stats.push({ text: "Total", value: totalStats, current_progress: (totalStats / 600) * 100 })
+
+</script>
+
+<template>
+    <div class="stats-table">
+        <div class="stat" v-for="stat in stats">
+            <span class="name">{{ stat.text }}</span>
+            <span class="value">{{ stat.value }}</span>
+            <div class="progress">
+                <div class="current-progress" :style="{ width: stat.current_progress + '%' }"></div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<style lang="scss" scoped>
+.stats-table {
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+    font-size: 14px;
+
+    .stat {
+        display: flex;
+        align-items: center;
+        column-gap: 16px;
+
+        .name {
+            color: #303943;
+            opacity: .6;
+            flex-basis: 200px;
+        }
+
+        .progress {
+            width: 100%;
+            height: 2px;
+            background: #f4f5f4;
+            opacity: .9;
+            border-radius: 110px;
+
+            .current-progress {
+                background: #4BC07A;
+                height: 2px;
+            }
+        }
+    }
+}
+</style>

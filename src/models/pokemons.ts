@@ -37,7 +37,7 @@ export interface PokemonType {
 export interface PokemonStat {
     base_stat: number,
     effort: number,
-    stat: PokemonBasicRessource[]
+    stat: PokemonBasicRessource
 }
 
 export interface PokemonAbility {
