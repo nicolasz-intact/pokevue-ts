@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { watch, reactive } from 'vue'
 import type { PokemonStat } from '@/models/pokemons';
 
 interface Stat {
@@ -11,23 +12,39 @@ const props = defineProps<{
     stats: PokemonStat[]
 }>()
 
-const stats: Stat[] = []
-let totalStats: number = 0
-props.stats.forEach(stat => {
-    stats.push({
-        text: stat.stat.name,
-        value: stat.base_stat,
-        current_progress: stat.base_stat
+watch(
+    () => props.stats,
+    () => {
+        hydratePokeStats()
+    }
+);
+
+const state = reactive({
+    arr: [] as Stat[]
+});
+hydratePokeStats()
+
+
+function hydratePokeStats() {
+    state.arr = []
+    let totalStats: number = 0
+    props.stats.forEach(stat => {
+        state.arr.push({
+            text: stat.stat.name,
+            value: stat.base_stat,
+            current_progress: stat.base_stat
+        })
+        totalStats += stat.base_stat
     })
-    totalStats += stat.base_stat
-})
-stats.push({ text: "Total", value: totalStats, current_progress: (totalStats / 600) * 100 })
+    state.arr.push({ text: "Total", value: totalStats, current_progress: (totalStats / 600) * 100 })
+}
+
 
 </script>
 
 <template>
     <div class="stats-table">
-        <div class="stat" v-for="stat in stats">
+        <div class="stat" v-for="stat in state.arr">
             <span class="name">{{ stat.text }}</span>
             <span class="value">{{ stat.value }}</span>
             <div class="progress">
