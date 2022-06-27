@@ -20,9 +20,9 @@ const loadMorePokemons = async () => {
 };
 
 const handleScroll = (e: any) => {
+  const objetRect = scrollComponent.value
   if (
-    window.scrollY + window.innerHeight >=
-    document.body.scrollHeight - 50 && !pokemonsStore.isLoading
+    objetRect.getBoundingClientRect().bottom <= window.innerHeight && !pokemonsStore.isLoading
   ) {
     loadMorePokemons()
   }
@@ -62,11 +62,10 @@ onUnmounted(() => {
   }
 
   .pokemons-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
     grid-gap: 1em;
-    align-items: center;
-    padding: 1em;
+    justify-content: center;
   }
 
   .loader {
@@ -80,6 +79,7 @@ onUnmounted(() => {
     }
   }
 }
+
 .search_button {
   cursor: pointer;
   position: fixed;
