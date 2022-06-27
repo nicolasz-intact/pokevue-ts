@@ -1,35 +1,59 @@
 <script setup lang="ts">
-import PokemonCard from '@/components/PokemonCard.vue'
-import { computed } from "vue"
-import { usePokemonsStore } from "@/stores/pokemons"
+import PokemonCard from "@/components/PokemonCard.vue";
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import { usePokemonsStore } from "@/stores/pokemons";
 
 const pokemonsStore = usePokemonsStore()
 
-const pokemons = computed(() => {
-  return pokemonsStore.pokemons
-})
+const scrollComponent = ref(null);
 
+if (!pokemonsStore.pokemons.length) {
+  await pokemonsStore.fetchAll();
+}
+
+const pokemons = computed(() => {
+  return pokemonsStore.pokemons;
+});
+
+const loadMorePokemons = async () => {
+  await pokemonsStore.fetchAll();
+};
+
+const handleScroll = (e: any) => {
+  if (
+    window.scrollY + window.innerHeight >=
+    document.body.scrollHeight - 50 && !pokemonsStore.isLoading
+  ) {
+    loadMorePokemons()
+  }
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
   <div class="container">
     <h1>Pokedex</h1>
-    <div class="pokemons-list">
-      <template v-for="pokemon in pokemons" :key="pokemon.id">
-        <PokemonCard :pokemon="pokemon" />
-      </template>
+    <div ref="scrollComponent" class="pokemons-list">
+      <PokemonCard v-for="pokemon in pokemons" :key="pokemon.id" :pokemon="pokemon" />
+    </div>
+    <div class="loader" v-if="pokemonsStore.getIsLoadingState">
+      <img class="pokesmall" alt="pokeball" src="../assets/pokeball_complete.svg" />
+      <span>Loading more pokemons...</span>
     </div>
   </div>
-  <font-awesome-icon class="search_button" icon="fa-solid fa-sliders" />
-
-  <!-- <img class="search_button" src="@/assets/icons/floating_button.svg" /> -->
+  <font-awesome-icon @click="modal_search = !modal_search" class="search_button" icon="fa-solid fa-sliders" />
 </template>
 
 <style lang="scss" scoped>
 .container {
   background-color: var(--background-color-white);
   padding-top: 7em;
-
 
   h1 {
     margin: 0em auto 1em auto;
@@ -44,8 +68,18 @@ const pokemons = computed(() => {
     align-items: center;
     padding: 1em;
   }
-}
 
+  .loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+      width: 3em;
+      animation: spin 4s linear infinite;
+    }
+  }
+}
 .search_button {
   cursor: pointer;
   position: fixed;
@@ -53,10 +87,20 @@ const pokemons = computed(() => {
   right: 1em;
   width: 20px;
   height: 20px;
-  z-index: 1;
+  z-index: 2;
   padding: 0.7em;
-  background: #6C79DB;
+  background: #6c79db;
   border-radius: 40px;
   color: #fff;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

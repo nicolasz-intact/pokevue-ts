@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import MenuCard from '@/components/MenuCard.vue'
-import SearchBar from '@/components/SearchBar.vue'
+import MenuCard from "@/components/MenuCard.vue";
+import SearchBar from "@/components/SearchBar.vue";
 </script>
 
 <template>
   <div class="container">
-      <h1>What Pokemon <br> are you looking for ?</h1>
-      <SearchBar />
-      <MenuCard />
+    <h1>
+      What Pokemon <br />
+      are you looking for ?
+    </h1>
+    <SearchBar />
+    <MenuCard />
   </div>
-
 </template>
 
 <style lang="scss" scoped>

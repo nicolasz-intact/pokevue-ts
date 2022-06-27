@@ -1,29 +1,37 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-const router = useRouter()
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 function backAction() {
-  switch(router.currentRoute.value.name) {
-    case 'PokemonDetails':
-      router.push('/pokedex')
-      break
-    case 'pokedex':
-      router.push('/')
-      break
+  switch (router.currentRoute.value.name) {
+    case "PokemonDetails":
+      router.push("/pokedex");
+      break;
+    case "pokedex":
+      router.push("/");
+      break;
     default:
-      router.push('/')
+      router.push("/");
   }
 }
 </script>
 
 <template>
-    <img  v-if="router.currentRoute.value.name !== 'PokemonDetails'" class="pokelogo" src="@/assets/pokeicon.svg" />
-    <div v-if="router.currentRoute.value.name !== 'home'" class="back" @click="backAction()">
-        <img alt="back-arrow" src="@/assets/icons/back.svg" />
-    </div>
-    <div v-if="router.currentRoute.value.name == 'PokemonDetails'" class="like">
-        <font-awesome-icon icon="fa-solid fa-heart" />
-    </div>
+  <img
+    v-if="router.currentRoute.value.name !== 'PokemonDetails'"
+    class="pokelogo"
+    src="@/assets/pokeicon.svg"
+  />
+  <div
+    v-if="router.currentRoute.value.name !== 'home'"
+    class="back"
+    @click="backAction()"
+  >
+    <img alt="back-arrow" src="@/assets/icons/back.svg" />
+  </div>
+  <div v-if="router.currentRoute.value.name == 'PokemonDetails'" class="like">
+    <font-awesome-icon icon="fa-solid fa-heart" />
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -44,9 +52,9 @@ function backAction() {
 }
 
 .pokelogo {
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 999;
-  }
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 999;
+}
 </style>

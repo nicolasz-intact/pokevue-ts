@@ -1,19 +1,20 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
-import Header from './components/Header.vue'
-import { usePokemonsStore } from "@/stores/pokemons"
+import { RouterView } from "vue-router";
+import Header from "./components/Header.vue";
+// import { usePokemonsStore } from "@/stores/pokemons"
 
-const pokemonsStore = usePokemonsStore()
-if(!pokemonsStore.pokemons.length) {
-  pokemonsStore.fetchAll()
-}
-
+// const pokemonsStore = usePokemonsStore()
+// if(!pokemonsStore.pokemons.length) {
+//   pokemonsStore.fetchAll()
+// }
 </script>
 
 <template>
-  <Header/>
+  <Header />
   <div class="main">
-    <RouterView />
+    <Suspense>
+      <RouterView />
+    </Suspense>
   </div>
 </template>
 

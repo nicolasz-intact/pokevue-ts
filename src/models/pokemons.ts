@@ -1,69 +1,69 @@
 export interface Pokemon {
-    id: number,
-    name: string,
-    url: string,
-    types: PokemonType[],
-    height: number,
-    weight: number,
-    description: string,
-    stats: PokemonStat[],
-    abilities: PokemonAbility[],
-    moves: PokemonMove[],
-    gender_rate: number,
-    sprite: string,
-    sprites: PokemonSprites,
-    color: string,
-    egg_goups: PokemonBasicRessource[],
-    flavors_text: PokemonFlavorsText[],
-    evolution_chains_id: string
+  id: number;
+  name: string;
+  url: string;
+  types: PokemonType[];
+  height: number;
+  weight: number;
+  description: string;
+  stats: PokemonStat[];
+  abilities: PokemonAbility[];
+  moves: PokemonMove[];
+  gender_rate: number;
+  sprite: string;
+  sprites: PokemonSprites;
+  color: string;
+  egg_goups: PokemonBasicRessource[];
+  flavors_text: PokemonFlavorsText[];
+  evolution_chains_id: string;
 }
 
 export interface PokemonBasicRessource {
-    url: string,
-    name: string
+  url: string;
+  name: string;
 }
 
 export interface PokemonsList {
-    count: number;
-    next: string | null;
-    previous: string | null;
-    results: Pokemon[];
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Pokemon[];
 }
 
 export interface PokemonType {
-    slot: number,
-    type: PokemonBasicRessource
+  slot: number;
+  type: PokemonBasicRessource;
 }
 
 export interface PokemonStat {
-    base_stat: number,
-    effort: number,
-    stat: PokemonBasicRessource
+  base_stat: number;
+  effort: number;
+  stat: PokemonBasicRessource;
 }
 
 export interface PokemonAbility {
-    slot: number,
-    is_hidden: boolean,
-    ability: PokemonBasicRessource
+  slot: number;
+  is_hidden: boolean;
+  ability: PokemonBasicRessource;
 }
 
 export interface PokemonMove {
-    move: PokemonBasicRessource;
+  move: PokemonBasicRessource;
 }
 
 export interface PokemonSprites {
-    front_default: string | null;
-    front_shiny: string | null;
-    front_female: string | null;
-    front_shiny_female: string | null;
-    back_default: string | null;
-    back_shiny: string | null;
-    back_female: string | null;
-    back_shiny_female: string | null;
+  front_default: string | null;
+  front_shiny: string | null;
+  front_female: string | null;
+  front_shiny_female: string | null;
+  back_default: string | null;
+  back_shiny: string | null;
+  back_female: string | null;
+  back_shiny_female: string | null;
 }
 
 export interface PokemonFlavorsText {
-    flavor_text: string,
-    language: PokemonBasicRessource,
-    version: PokemonBasicRessource
+  flavor_text: string;
+  language: PokemonBasicRessource;
+  version: PokemonBasicRessource;
 }
