@@ -146,7 +146,7 @@ function changePage() {
             bottom: 0;
             right: 10px;
             max-width: 65px;
-            z-index: 3;
+            z-index: 1;
         }
 
         .card--hint {

@@ -35,6 +35,7 @@ async function hydrateEvolutionChain() {
 
 <template>
     <div class="evolutions">
+        <h3>Evolution Chain</h3>
         <EvolutionChain :chain="evolution_chain.chain.chain" />
     </div>
 </template>

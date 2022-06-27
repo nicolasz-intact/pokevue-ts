@@ -20,6 +20,9 @@ const pokemons = computed(() => {
       </template>
     </div>
   </div>
+  <font-awesome-icon class="search_button" icon="fa-solid fa-sliders" />
+
+  <!-- <img class="search_button" src="@/assets/icons/floating_button.svg" /> -->
 </template>
 
 <style lang="scss" scoped>
@@ -41,5 +44,19 @@ const pokemons = computed(() => {
     align-items: center;
     padding: 1em;
   }
+}
+
+.search_button {
+  cursor: pointer;
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  width: 20px;
+  height: 20px;
+  z-index: 1;
+  padding: 0.7em;
+  background: #6C79DB;
+  border-radius: 40px;
+  color: #fff;
 }
 </style>
