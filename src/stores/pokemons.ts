@@ -37,6 +37,12 @@ export const usePokemonsStore = defineStore('pokemons', {
                 pokemon.types.forEach(types => ptypes.push(types.type.name))
                 return ptypes
             }
+        },
+        getSpriteByName: (state) => {
+            return (name: string) => {
+                const pokemon = state.pokemons.find(pokemon => pokemon.name == name)
+                return pokemon?.sprite
+            }
         }
     },
     actions: {
@@ -47,12 +53,13 @@ export const usePokemonsStore = defineStore('pokemons', {
             await Promise.all(
                 pokemons.results.map(async (pokemon) => {
                     const pokemon_description: Pokemon = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)).json()
-                    const pokemon_color: any = await (await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.name}`)).json()
-                    pokemon_description.color = pokemon_color.color.name
+                    const pokemon_species: any = await (await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.name}`)).json()
+                    pokemon_description.color = pokemon_species.color.name
                     pokemon_description.sprite = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/official-artwork/${pokemon_description.id}.png?raw=true`
-                    pokemon_description.egg_goups = pokemon_color.egg_groups
-                    pokemon_description.flavors_text = pokemon_color.flavor_text_entries
-                    pokemon_description.gender_rate = pokemon_color.gender_rate
+                    pokemon_description.egg_goups = pokemon_species.egg_groups
+                    pokemon_description.flavors_text = pokemon_species.flavor_text_entries
+                    pokemon_description.gender_rate = pokemon_species.gender_rate
+                    pokemon_description.evolution_chains_id = pokemon_species.evolution_chain.url.replace(/\/$/, "").split('/').pop()
 
                     this.pokemons.push(pokemon_description)
                 })

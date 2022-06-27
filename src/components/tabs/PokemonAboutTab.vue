@@ -21,10 +21,10 @@ function convertWeight() {
 
 function genderRate(gender?: string) {
     let rate: number = props.gender
-    if(gender == 'male') {
-        rate = (8 - props.gender) 
+    if (gender == 'male') {
+        rate = (8 - props.gender)
     }
-    const gender_rate = ((8 - rate) / 8)  * 100
+    const gender_rate = ((8 - rate) / 8) * 100
     return gender_rate + ' %'
 }
 </script>
@@ -53,10 +53,10 @@ function genderRate(gender?: string) {
             </div>
             <div class="col">
                 <div class="cell">
-                    <img alt="male" src="@/assets/icons/male.svg"/>
+                    <img alt="male" src="@/assets/icons/male.svg" />
                     {{ genderRate('male') }}
                     <img alt="female" src="@/assets/icons/female.svg" />
-                    {{ genderRate()}}
+                    {{ genderRate() }}
                 </div>
                 <div class="cell">
                     <span v-for="egg in egg_groups">

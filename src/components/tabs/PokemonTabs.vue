@@ -2,6 +2,7 @@
 import { ref, reactive } from 'vue'
 import PokemonAboutTab from './PokemonAboutTab.vue';
 import PokemonStatsTab from './PokemonStatsTab.vue';
+import PokemonEvolutionTab from './PokemonEvolutionTab.vue';
 import type { Pokemon } from '@/models/pokemons'
 
 const props = defineProps<{
@@ -39,14 +40,12 @@ function getPokemonDescription() {
                 {{ tab.text }}
             </div>
         </div>
-        <PokemonAboutTab v-if="activeTab == 'about'" 
-          :gender="pokemon.gender_rate" 
-          :height="pokemon.height" 
-          :weight="pokemon.weight"
-          :description="getPokemonDescription()"
-          :egg_groups="pokemon.egg_goups"/>
-        <PokemonStatsTab v-if="activeTab == 'stats'" 
-          :stats="pokemon.stats"/>
+        <PokemonAboutTab v-if="activeTab == 'about'" :gender="pokemon.gender_rate" :height="pokemon.height"
+            :weight="pokemon.weight" :description="getPokemonDescription()" :egg_groups="pokemon.egg_goups" />
+        <PokemonStatsTab v-if="activeTab == 'stats'" :stats="pokemon.stats" />
+        <Suspense>
+            <PokemonEvolutionTab v-if="activeTab == 'evolution'" :evolution_chain_id="pokemon.evolution_chains_id" />
+        </Suspense>
     </div>
 </template>
 
@@ -75,7 +74,6 @@ function getPokemonDescription() {
                 border-bottom: 2px solid #6C79DB;
             }
         }
-
     }
 }
 </style>

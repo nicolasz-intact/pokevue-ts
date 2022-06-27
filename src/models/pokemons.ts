@@ -14,7 +14,8 @@ export interface Pokemon {
     sprites: PokemonSprites,
     color: string,
     egg_goups: PokemonBasicRessource[],
-    flavors_text: PokemonFlavorsText[]
+    flavors_text: PokemonFlavorsText[],
+    evolution_chains_id: string
 }
 
 export interface PokemonBasicRessource {
