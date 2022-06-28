@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import PokemonCard from "@/components/PokemonCard.vue";
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { usePokemonsStore } from "@/stores/pokemons";
+import PokemonCard from "@/components/PokemonCard.vue";
+import SearchModal from "@/components/modals/SearchModal.vue"
 
 const pokemonsStore = usePokemonsStore()
 
 const scrollComponent = ref(null);
+const modal_search = ref(false);
 
 if (!pokemonsStore.pokemons.length) {
   await pokemonsStore.fetchAll();
@@ -47,6 +49,9 @@ onUnmounted(() => {
       <span>Loading more pokemons...</span>
     </div>
   </div>
+  <Transition name="fade" appear>
+    <SearchModal v-if="modal_search" @close-modal="modal_search = false"/>
+  </Transition>
   <font-awesome-icon @click="modal_search = !modal_search" class="search_button" icon="fa-solid fa-sliders" />
 </template>
 

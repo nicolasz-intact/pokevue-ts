@@ -1,13 +1,18 @@
 <template>
   <div class="searchbar">
-    <input type="text" :placeholder="placeholder" />
+    <input type="text" :placeholder="placeholder" @keyup.enter="handleEnter"/>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 
+const emit = defineEmits(['submit'])
 const placeholder = ref("Search Pokemon, Move, Ability etc");
+
+function handleEnter(event) {
+  emit('submit', event.target.value.toLowerCase())
+}
 </script>
 
 <style scoped lang="scss">

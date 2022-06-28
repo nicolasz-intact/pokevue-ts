@@ -25,6 +25,12 @@ export const usePokemonsStore = defineStore("pokemons", {
             return (pokemonId: number) =>
                 state.pokemons.find((pokemon) => pokemon.id == pokemonId);
         },
+        getByName: (state) => {
+            return (name: string) => {
+                const pokemon = state.pokemons.find((pokemon) => pokemon.name == name);
+                return pokemon?.id;
+            };
+        },
         getPokemonId: (state) => {
             return (pokemonId: number) => {
                 if (pokemonId < 10) {
